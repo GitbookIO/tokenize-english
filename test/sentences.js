@@ -2,6 +2,8 @@ var _ = require("lodash");
 var should = require("should");
 
 var tokenize = require('tokenize-text')();
+var tokenizeHtml = require('tokenize-htmltext');
+
 var english = require("../")(tokenize);
 
 describe("Sentences Tokeniser", function() {
@@ -68,5 +70,14 @@ describe("Sentences Tokeniser", function() {
 
         sentences[1].index.should.be.equal(26);
         sentences[1].offset.should.be.equal(6);
+    });
+
+    it("should extract correctly sentences from HTML", function() {
+        var html = tokenizeHtml('<p>On <b>Jan. 20</b>, former <a href="#">Sen. Barack Obama</a> became the 44th President of the U.S. Millions attended the Inauguration.</p>');
+        var sentences = english.sentences()(html);
+
+        sentences.length.should.be.equal(2);
+        sentences[0].value.should.equal('On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S.');
+        sentences[1].value.should.equal(' Millions attended the Inauguration.');
     });
 });

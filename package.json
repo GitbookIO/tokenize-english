@@ -10,7 +10,8 @@
     "devDependencies": {
         "mocha": "2.3.3",
         "should": "7.1.0",
-        "tokenize-text": "1.0.2"
+        "tokenize-text": "1.1.0",
+        "tokenize-htmltext": "1.0.0"
     },
     "scripts": {
         "test": "mocha --reporter spec --recursive --bail"
