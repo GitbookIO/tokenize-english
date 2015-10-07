@@ -7,23 +7,29 @@ var english = require("../")(tokenize);
 describe("Sentences Tokeniser", function() {
     it("should split correctly", function() {
         var sentences = english.sentences()("First. Second.");
-        _.pluck(sentences, "value").should.be.eql(["First.", "Second."]);
 
+        sentences[0].value.should.be.equal("First.");
         sentences[0].index.should.be.equal(0);
         sentences[0].offset.should.be.equal(6);
 
-        sentences[1].index.should.be.equal(7);
-        sentences[1].offset.should.be.equal(7);
+        sentences[1].value.should.be.equal(" Second.");
+        sentences[1].index.should.be.equal(6);
+        sentences[1].offset.should.be.equal(8);
     });
 
     it("should handle urls", function() {
         var sentences = english.sentences()("Google is accessible at https://www.google.fr.");
+
         sentences.length.should.be.equal(1);
+        sentences[0].value.should.equal('Google is accessible at https://www.google.fr.');
     });
 
     it("should handle abbreviation (1)", function() {
         var sentences = english.sentences()("On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S. Millions attended the Inauguration.");
+
         sentences.length.should.be.equal(2);
+        sentences[0].value.should.equal('On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S.');
+        sentences[1].value.should.equal(' Millions attended the Inauguration.');
     });
 
     it("should handle abbreviation (2)", function() {
@@ -39,6 +45,8 @@ describe("Sentences Tokeniser", function() {
     it("should handle dot in middle of word if followed by capital letter", function() {
         var sentences = english.sentences()("Hello Barney.The bird in the word.");
         sentences.length.should.be.equal(2);
+        sentences[0].value.should.equal('Hello Barney.');
+        sentences[1].value.should.equal('The bird in the word.');
     });
 
     it("should handle question- and exlamation mark", function() {
@@ -56,7 +64,7 @@ describe("Sentences Tokeniser", function() {
         sentences.length.should.be.equal(2);
 
         sentences[0].index.should.be.equal(0);
-        sentences[0].offset.should.be.equal(25);
+        sentences[0].offset.should.be.equal(26);
 
         sentences[1].index.should.be.equal(26);
         sentences[1].offset.should.be.equal(6);
