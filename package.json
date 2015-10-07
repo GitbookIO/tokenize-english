@@ -1,0 +1,27 @@
+{
+    "name": "tokenize-english",
+    "version": "1.0.0",
+    "homepage": "https://github.com/GitbookIO/tokenize-english",
+    "description": "Tokenizer for english sentences",
+    "main": "lib/index.js",
+    "dependencies": {
+        "lodash": "^3.2.0"
+    },
+    "devDependencies": {
+        "mocha": "2.3.3",
+        "should": "7.1.0",
+        "tokenize-text": "1.0.0"
+    },
+    "scripts": {
+        "test": "mocha --reporter spec --recursive --bail"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/GitbookIO/tokenize-english.git"
+    },
+    "author": "GitBook <contact@gitbook.com>",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/GitbookIO/tokenize-english/issues"
+    }
+}
