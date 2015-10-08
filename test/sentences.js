@@ -78,6 +78,11 @@ describe("Sentences Tokeniser", function() {
 
         sentences.length.should.be.equal(2);
         sentences[0].value.should.equal('On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S.');
+        sentences[0].offset.should.equal(97);
+        sentences[0].index.should.equal(3);
+
         sentences[1].value.should.equal(' Millions attended the Inauguration.');
+        sentences[1].offset.should.equal(36);
+        sentences[1].index.should.equal(100);
     });
 });
