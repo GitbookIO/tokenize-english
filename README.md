@@ -18,10 +18,15 @@ $ npm install tokenize-english
 var tokenize = require('tokenize-text')();
 var tokenizeEnglish = require('tokenize-english')(tokenize);
 
-var tokens = tokenizeEnglish.sentences('This is a sentence. And here is another one.')
+var tokens = tokenizeEnglish.sentences("On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S. Millions attended the Inauguration.")
 
 /*
-
+[ { index: 0,
+    value: 'On Jan. 20, former Sen. Barack Obama became the 44th President of the U.S.',
+    offset: 74 },
+  { index: 74,
+    value: ' Millions attended the Inauguration.',
+    offset: 36 } ]
 */
 ```
 
