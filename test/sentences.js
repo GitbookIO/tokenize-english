@@ -1,10 +1,14 @@
 var _ = require("lodash");
+var fs = require("fs");
+var path = require("path");
 var should = require("should");
 
 var tokenize = require('tokenize-text')();
 var tokenizeHtml = require('tokenize-htmltext');
 
 var english = require("../")(tokenize);
+
+var TEST_HTML = fs.readFileSync(path.resolve(__dirname, './fixtures/test.html'), { encoding: 'utf-8' });
 
 describe("Sentences Tokeniser", function() {
     it("should split correctly", function() {
@@ -72,7 +76,7 @@ describe("Sentences Tokeniser", function() {
         sentences[1].offset.should.be.equal(6);
     });
 
-    it("should extract correctly sentences from HTML", function() {
+    it("should extract correctly sentences from HTML (simple)", function() {
         var html = tokenizeHtml('<p>On <b>Jan. 20</b>, former <a href="#">Sen. Barack Obama</a> became the 44th President of the U.S. Millions attended the Inauguration.</p>');
         var sentences = english.sentences()(html);
 
@@ -84,5 +88,12 @@ describe("Sentences Tokeniser", function() {
         sentences[1].value.should.equal(' Millions attended the Inauguration.');
         sentences[1].offset.should.equal(36);
         sentences[1].index.should.equal(100);
+    });
+
+    it("should extract correctly sentences from HTML (mid)", function() {
+        var html = tokenizeHtml(TEST_HTML);
+        var sentences = english.sentences()(html);
+
+        sentences.length.should.be.equal(5);
     });
 });
