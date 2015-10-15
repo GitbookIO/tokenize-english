@@ -96,4 +96,29 @@ describe("Sentences Tokeniser", function() {
 
         sentences.length.should.be.equal(5);
     });
+
+    it('should correctly merge tokens and split into sentences', function() {
+        var tokens = [
+            {
+                value: "When an x86-based computer is turned on, it begins a complex path to get to the stage where control is transferred to our kernel's \"main\" routine (",
+                index: 62,
+                offset: 147
+            },
+            {
+                value: "). For this course, we are only going to consider the BIOS boot method and not it's successor (UEFI).",
+                index: 218,
+                offset: 101
+            }
+        ];
+
+        var sentences = english.sentences()(tokens);
+        sentences.should.have.lengthOf(2);
+        sentences[0].index.should.equal(62);
+        sentences[0].offset.should.equal(158);
+        sentences[0].value.should.equal('When an x86-based computer is turned on, it begins a complex path to get to the stage where control is transferred to our kernel\'s "main" routine ().');
+
+        sentences[1].index.should.equal(220);
+        sentences[1].offset.should.equal(99);
+        sentences[1].value.should.equal(' For this course, we are only going to consider the BIOS boot method and not it\'s successor (UEFI).')
+    });
 });
